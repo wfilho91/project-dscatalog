@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +27,8 @@ public class CategoryResource {
 	private CategoryService categoryService;
 
 	@GetMapping
-	public ResponseEntity<List<CategoryDTO>> findAll() {
-		List<CategoryDTO> categories = categoryService.findAll();
+	public ResponseEntity<Page<CategoryDTO>> findAll(Pageable pageable) {
+		Page<CategoryDTO> categories = categoryService.findAll(pageable);
 
 		return ResponseEntity.ok().body(categories);
 	}
