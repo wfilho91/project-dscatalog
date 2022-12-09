@@ -2,7 +2,6 @@ package com.devsuperior.dscatalog.resources;
 
 import java.net.URI;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +21,12 @@ import com.devsuperior.dscatalog.services.ProductService;
 @RestController
 @RequestMapping(value = "/products")
 public class ProductResource {
-	@Autowired
-	private ProductService productService;
+
+	private final ProductService productService;
+
+	public ProductResource(final ProductService productService) {
+		this.productService = productService;
+	}
 
 	@GetMapping
 	public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable) {
